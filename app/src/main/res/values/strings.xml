@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CryptoPork</string>
+    <string name="coin_bin_base_url">https://api.coinmarketcap.com/</string>
 </resources>

@@ -7,7 +7,7 @@ import farsight.solutions.cryptopork.App;
 import farsight.solutions.cryptopork.ui.MainActivity;
 
 @Singleton
-@Component(modules = {AppModule.class})
+@Component(modules = {AppModule.class, NetworkModule.class})
 public interface AppComponent {
     void inject(App app);
 

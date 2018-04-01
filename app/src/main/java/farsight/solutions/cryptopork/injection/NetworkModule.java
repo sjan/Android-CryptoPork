@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import farsight.solutions.cryptopork.R;
-import farsight.solutions.cryptopork.api.CoinbinApi;
+import farsight.solutions.cryptopork.api.CoinMarketCapApi;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -45,18 +45,17 @@ public class NetworkModule {
         return GsonConverterFactory.create(new GsonBuilder().create());
     }
 
-
     @Provides
     @Singleton
-    CoinbinApi provideCoinBinApi(@ForApplication Context context,
+    CoinMarketCapApi provideCoinBinApi(@ForApplication Context context,
                                      OkHttpClient httpClient,
                                      GsonConverterFactory gsonConverterFactory) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(context.getString(R.string.coin_bin_base_url))
+                .baseUrl(context.getString(R.string.coin_market_cap_base_url))
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(httpClient)
                 .build();
-        return retrofit.create(CoinbinApi.class);
+        return retrofit.create(CoinMarketCapApi.class);
     }
 }

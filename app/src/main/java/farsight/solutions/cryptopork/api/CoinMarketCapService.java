@@ -5,18 +5,18 @@ import java.util.List;
 import javax.inject.Inject;
 
 import farsight.solutions.cryptopork.api.model.Coin;
-import retrofit2.Call;
+import io.reactivex.Single;
 
-public class CoinbinService {
-
-    @Inject
-    CoinbinApi api;
+public class CoinMarketCapService {
 
     @Inject
-    public CoinbinService() {
+    CoinMarketCapApi api;
+
+    @Inject
+    public CoinMarketCapService  () {
     }
 
-    public Call<List<Coin>> coins() {
+    public Single<List<Coin>> coins() {
         return api.coins(100);
     }
 

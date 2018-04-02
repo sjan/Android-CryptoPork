@@ -7,9 +7,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import farsight.solutions.cryptopork.api.CoinMarketCapService;
 import farsight.solutions.cryptopork.data.DataManager;
 import farsight.solutions.cryptopork.ui.MainPresenter;
+import farsight.solutions.cryptopork.ui.PopUpDialogPresenter;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -29,7 +29,12 @@ public class AppModule {
     }
 
     @Provides
-    MainPresenter provideMainPresenter(CoinMarketCapService service,DataManager dataManager) {
-        return new MainPresenter(service, dataManager, AndroidSchedulers.mainThread(), Schedulers.io());
+    MainPresenter provideMainPresenter(DataManager dataManager) {
+        return new MainPresenter(dataManager, AndroidSchedulers.mainThread(), Schedulers.io());
+    }
+
+    @Provides
+    PopUpDialogPresenter providePopupDialogPresenter(DataManager dataManager) {
+        return new PopUpDialogPresenter (dataManager);
     }
 }

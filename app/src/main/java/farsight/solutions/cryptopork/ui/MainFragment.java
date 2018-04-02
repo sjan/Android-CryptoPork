@@ -5,15 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -34,7 +36,13 @@ public class MainFragment extends Fragment implements MainView {
     @BindView(R.id.data)
     ListView listView;
 
-    ArrayAdapter listAdapter;
+    @BindView(R.id.refresh_button)
+    Button refreshButton;
+
+    @BindView(R.id.refresh_label)
+    TextView textView;
+
+    ArrayAdapter <Coin> listAdapter;
 
     Unbinder unbinder;
 
@@ -53,11 +61,11 @@ public class MainFragment extends Fragment implements MainView {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         unbinder = ButterKnife.bind(this, view);
-        presenter.attachView(this);
-
         listAdapter =  new CoinAdapter(getContext(), new ArrayList<>());
         listView.setAdapter(listAdapter);
-
+        refreshButton.setOnClickListener(v -> presenter.onRefreshClick());
+        presenter.attachView(this);
+        presenter.onCreateView();
         return view;
     }
 
@@ -76,8 +84,17 @@ public class MainFragment extends Fragment implements MainView {
 
     @Override
     public void popupDialog(String currencyId) {
-        //popup fragment transition
+        PopUpDialogFragment.
+                newInstance(currencyId).show(this.getFragmentManager(), "popup_dialog");
     }
+
+    @Override
+    public void updateRefreshTime(Long time) {
+        String titleFormat = getContext().getString(R.string.last_refreshed_title_format);
+        String dateFormat = new SimpleDateFormat(getContext().getString(R.string.time_format)).format(new Date(time*1000));
+        textView.setText(String.format(titleFormat, dateFormat));
+    }
+
     public class CoinAdapter extends ArrayAdapter<Coin> {
         private List<Coin> list;
         private Context context;
@@ -91,21 +108,19 @@ public class MainFragment extends Fragment implements MainView {
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            View v = convertView;
-            if(v== null)
-                v = LayoutInflater.from(context).inflate(R.layout.row,parent,false);
+            if(convertView == null)
+                convertView = LayoutInflater.from(context).inflate(R.layout.row,parent,false);
 
-            ((TextView)v.findViewById(R.id.label)).setText(list.get(position).getName());
+            ((TextView)convertView.findViewById(R.id.currency_label)).setText(list.get(position).getName());
+            ((TextView)convertView.findViewById(R.id.currency_sub_label)).setText(list.get(position).getSymbol());
+            String formattedFloat  = String.format("%.4f", list.get(position).getPriceUsd());
+            ((TextView)convertView.findViewById(R.id.value_label)).setText(formattedFloat);
 
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d(TAG, "click " + position);
-                }
-            });
+            convertView.setOnClickListener(v1 -> presenter.onClickCoin(list.get(position).getId()));
 
-            return v;
+            return convertView;
         }
     }
+
 }
 

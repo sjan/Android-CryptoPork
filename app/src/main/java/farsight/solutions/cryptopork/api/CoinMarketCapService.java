@@ -19,5 +19,4 @@ public class CoinMarketCapService {
     public Single<List<Coin>> coins() {
         return api.coins(100);
     }
-
 }

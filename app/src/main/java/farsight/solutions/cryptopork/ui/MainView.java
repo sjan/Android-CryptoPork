@@ -6,4 +6,5 @@ import farsight.solutions.cryptopork.api.model.Coin;
 public interface MainView {
     void populateCoins(List<Coin> list);
     void popupDialog(String currencyId);
+    void updateRefreshTime(Long time);
 }

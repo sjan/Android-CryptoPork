@@ -1,14 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/label"
-        android:layout_centerInParent="true"
+    android:orientation="vertical"
+    android:layout_height="@dimen/list_height">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="TEST"/>
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/first_line"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:id="@+id/currency_label"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/list_primary_text_size"
+                android:alpha="@dimen/list_primary_text_alpha"
+                android:textColor="@color/black"
+                android:text="Symbol"/>
+            <TextView
+                android:id="@+id/value_label"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/list_primary_text_size"
+                android:alpha="@dimen/list_primary_text_alpha"
+                android:textColor="@color/black"
+                android:text="$100"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/first_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/currency_sub_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/list_secondary_text_size"
+                android:textColor="@color/black"
+                android:alpha="@dimen/list_secondary_text_alpha"
+                android:text="@string/row_sub_label"/>
+            <TextView
+                android:id="@+id/value_sub_label"
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/list_secondary_text_size"
+                android:alpha="@dimen/list_secondary_text_alpha"
+                android:textColor="@color/black"
+                android:text="USD"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

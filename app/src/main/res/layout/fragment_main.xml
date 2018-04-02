@@ -12,5 +12,28 @@
         android:layout_height="match_parent">
     </ListView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_height"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/refresh_label"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Last Refreshed: 10 10 10"/>
+        <Button
+            android:id="@+id/refresh_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Refresh"/>
+    </LinearLayout>
+
 </RelativeLayout>
 

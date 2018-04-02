@@ -6,14 +6,14 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import farsight.solutions.cryptopork.data.CoinPersistence;
+import farsight.solutions.cryptopork.data.DataPersistence;
 
 @Module
 public class PersistenceModule {
 
     @Provides
     @Singleton
-    CoinPersistence provideCoinPersistence(@ForApplication Context context) {
-        return new CoinPersistence(context);
+    DataPersistence provideCoinPersistence(@ForApplication Context context) {
+        return new DataPersistence(context);
     }
 }

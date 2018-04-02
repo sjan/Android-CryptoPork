@@ -2,9 +2,8 @@
     <string name="app_name">CryptoPork</string>
     <string name="coin_market_cap_base_url">https://api.coinmarketcap.com/</string>
     <string name="denoti_base_url">https://api.denoti.com/</string>
-    <string name="row_sub_label">Currency</string>
-    <string name="last_refreshed_title_format">Last Refreshed: %1$s </string>
-    <string name="time_format">yyyy.MM.dd \'at\' hh:mm a z</string>
+
+
     <string name="shared_preference_key">latest_prices</string>
     <string name="shared_preference">farsight.solutions.cryptopork</string>
 
@@ -17,4 +16,13 @@
     <string name="details_page_percent_change_1h_format">1hr Change: %1$.2f%%</string>
     <string name="details_page_percent_change_24h_format">24hr Change: %1$.2f%%</string>
     <string name="details_page_percent_change_7d_format">7day Change: %1$.2f%%</string>
+
+    <string name="refresh_label_format">Last Refreshed: %1$s </string>
+    <string name="refresh_time_format">yyyy.MM.dd \'at\' hh:mm a z</string>
+    <string name="refresh_button_label">Refresh</string>
+
+    <string name="row_value_format">%.4f</string>
+    <string name="row_sub_label">Currency</string>
+
+
 </resources>

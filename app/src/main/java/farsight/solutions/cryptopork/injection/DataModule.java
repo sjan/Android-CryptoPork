@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import farsight.solutions.cryptopork.api.CoinMarketCapService;
-import farsight.solutions.cryptopork.data.CoinPersistence;
+import farsight.solutions.cryptopork.data.DataPersistence;
 import farsight.solutions.cryptopork.data.DataManager;
 import io.reactivex.schedulers.Schedulers;
 
@@ -15,13 +15,13 @@ import io.reactivex.schedulers.Schedulers;
 public class DataModule {
     @Singleton
     @Provides
-    DataManager provideDataManager(CoinMarketCapService service, CoinPersistence persistence) {
+    DataManager provideDataManager(CoinMarketCapService service, DataPersistence persistence) {
         return new DataManager(service, persistence, Schedulers.computation());
     }
 
     @Singleton
     @Provides
-    CoinPersistence provideDataPersistence(@ForApplication Context context) {
-        return new CoinPersistence(context);
+    DataPersistence provideDataPersistence(@ForApplication Context context) {
+        return new DataPersistence(context);
     }
 }

@@ -18,8 +18,8 @@ import farsight.solutions.cryptopork.api.model.Coin;
 import static android.content.Context.MODE_PRIVATE;
 
 
-public class CoinPersistence {
-    private static final String TAG = CoinPersistence.class.getName();
+public class DataPersistence {
+    private static final String TAG = DataPersistence.class.getName();
     private static final String defaultDataFile = "default_data.json";
 
     private final SharedPreferences preference;
@@ -28,7 +28,7 @@ public class CoinPersistence {
     private final String SHARED_PREFERENCE_KEY;
     private final String SHARED_PREFERENCE;
 
-    public CoinPersistence(Context context) {
+    public DataPersistence(Context context) {
         SHARED_PREFERENCE_KEY = context.getResources().getString(R.string.shared_preference_key);
         SHARED_PREFERENCE = context.getResources().getString(R.string.shared_preference);
 
@@ -52,13 +52,11 @@ public class CoinPersistence {
     }
 
     public List<Coin> getLatest() {
-        Log.d(TAG, "getLatest");
         String latestPrices = preference.getString(SHARED_PREFERENCE_KEY, defaultResult);
         return new Gson().fromJson(latestPrices, new TypeToken<List<Coin>>(){}.getType());
     }
 
     public void saveLatest(List <Coin> coinList) {
-        Log.d(TAG, "saveLatest");
         String json = new Gson().toJson(coinList, new TypeToken<List<Coin>>(){}.getType());
         SharedPreferences.Editor editor = preference.edit();
         editor.putString(SHARED_PREFERENCE_KEY, json);

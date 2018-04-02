@@ -1,7 +1,5 @@
 package farsight.solutions.cryptopork.data;
 
-import android.util.Log;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,13 +12,12 @@ import io.reactivex.Single;
 
 public class DataManager {
     private static final String TAG = DataManager.class.getName();
-    private Map<String, Coin> coinCache = new HashMap<>();
-
+    final private Map<String, Coin> coinCache = new HashMap<>();
     final private CoinMarketCapService service;
-    final private CoinPersistence persistence;
+    final private DataPersistence persistence;
     final private Scheduler scheduler;
 
-    public DataManager(CoinMarketCapService service, CoinPersistence persistence, Scheduler scheduler) {
+    public DataManager(CoinMarketCapService service, DataPersistence persistence, Scheduler scheduler) {
         this.service = service;
         this.persistence = persistence;
         this.scheduler = scheduler;

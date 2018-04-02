@@ -12,7 +12,7 @@ import java.util.List;
 
 import farsight.solutions.cryptopork.api.CoinMarketCapService;
 import farsight.solutions.cryptopork.api.model.Coin;
-import farsight.solutions.cryptopork.data.CoinPersistence;
+import farsight.solutions.cryptopork.data.DataPersistence;
 import farsight.solutions.cryptopork.data.DataManager;
 import io.reactivex.Single;
 import io.reactivex.schedulers.TestScheduler;
@@ -24,7 +24,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class DataManagerUnitTest {
 
     @Mock
-    CoinPersistence persistence;
+    DataPersistence persistence;
 
     @Mock
     CoinMarketCapService service;

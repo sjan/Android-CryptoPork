@@ -64,9 +64,5 @@
                 android:textColor="@color/black"
                 android:text="USD"/>
         </LinearLayout>
-
     </LinearLayout>
-
-
-
 </RelativeLayout>

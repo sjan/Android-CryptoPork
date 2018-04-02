@@ -90,8 +90,8 @@ public class MainFragment extends Fragment implements MainView {
 
     @Override
     public void updateRefreshTime(Long time) {
-        String titleFormat = getContext().getString(R.string.last_refreshed_title_format);
-        String dateFormat = new SimpleDateFormat(getContext().getString(R.string.time_format)).format(new Date(time*1000));
+        String titleFormat = getContext().getString(R.string.refresh_label_format);
+        String dateFormat = new SimpleDateFormat(getContext().getString(R.string.refresh_time_format)).format(new Date(time*1000));
         textView.setText(String.format(titleFormat, dateFormat));
     }
 
@@ -109,11 +109,16 @@ public class MainFragment extends Fragment implements MainView {
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             if(convertView == null)
-                convertView = LayoutInflater.from(context).inflate(R.layout.row,parent,false);
+                convertView = LayoutInflater.from(context)
+                        .inflate(R.layout.row,parent,false);
 
-            ((TextView)convertView.findViewById(R.id.currency_label)).setText(list.get(position).getName());
-            ((TextView)convertView.findViewById(R.id.currency_sub_label)).setText(list.get(position).getSymbol());
-            String formattedFloat  = String.format("%.4f", list.get(position).getPriceUsd());
+            ((TextView)convertView.findViewById(R.id.currency_label))
+                    .setText(list.get(position).getName());
+            ((TextView)convertView.findViewById(R.id.currency_sub_label))
+                    .setText(list.get(position).getSymbol());
+            String formattedFloat  = String.format(
+                    context.getResources().getString(R.string.row_value_format),
+                    list.get(position).getPriceUsd());
             ((TextView)convertView.findViewById(R.id.value_label)).setText(formattedFloat);
 
             convertView.setOnClickListener(v1 -> presenter.onClickCoin(list.get(position).getId()));
